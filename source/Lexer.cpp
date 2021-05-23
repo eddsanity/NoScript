@@ -168,8 +168,8 @@ namespace noscript
             if (IsLetter(lex_char))
             {
                 auto word = this->ReadWord();
-                auto wordTokenType = noscript::LookupIdentifier(word);
-                result_token = Token(wordTokenType, word);
+                auto word_token_type = noscript::LookupIdentifier(word);
+                result_token = Token(word_token_type, word);
                 return result_token;
             }
             else if (IsDigit(lex_char))
@@ -186,5 +186,4 @@ namespace noscript
         this->ConsumeChar();
         return result_token;
     }
-
 }

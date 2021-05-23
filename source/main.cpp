@@ -32,5 +32,8 @@ auto main() -> int
         // std::cout << "{" << noscript::EnumAsString(curr_token.m_TokenType) << ", \"" << curr_token.m_TokenLiteral << "\"}\n";
         tokens.push_back(curr_token);
     }
+
+    for(auto itr = tokens.cbegin(); itr != tokens.cend(); itr++)
+        std::cout << "{" << noscript::EnumAsString((*itr).m_TokenType) << ", \"" << (*itr).m_TokenLiteral << "\"}\n";
     return 0;
 }
