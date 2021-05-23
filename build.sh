@@ -1,1 +1,1 @@
-g++ -std=c++17 -Iinclude/ source/*.cpp -o build/nolang
+g++ -std=c++17 -w -Iinclude/ source/*.cpp -o build/nolang
