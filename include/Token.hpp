@@ -95,9 +95,6 @@ namespace nolang
     class Token
     {
     public:
-        Token(Token &&) = delete;
-        Token &operator=(Token &&) = delete;
-
         Token() noexcept = default;
         Token(const TokenType&, const std::string &) noexcept;
 
