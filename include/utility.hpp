@@ -3,7 +3,7 @@
 
 #include <Token.hpp>
 
-namespace nolang
+namespace noscript
 {
     [[nodiscard]] auto
     IsLetter(char p_byte) noexcept -> bool;

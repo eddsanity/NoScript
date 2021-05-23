@@ -1,6 +1,6 @@
 #include <utility.hpp>
 
-namespace nolang
+namespace noscript
 {
     [[nodiscard]] auto
     IsLetter(char p_byte) noexcept -> bool
@@ -17,7 +17,7 @@ namespace nolang
     }
 
     [[nodiscard]] auto
-    EnumAsString(TokenType p_token) noexcept -> std::string
+    EnumAsString(noscript::TokenType p_token) noexcept -> std::string
     {
         switch(p_token)
         {

@@ -1,8 +1,8 @@
 #include <Token.hpp>
 
-namespace nolang
+namespace noscript
 {
-    nolang::Token::Token(const TokenType& p_TokenType, const std::string& p_TokenLiteral) noexcept 
+    noscript::Token::Token(const TokenType& p_TokenType, const std::string& p_TokenLiteral) noexcept 
     {
         this->m_TokenType = p_TokenType;
         this->m_TokenLiteral = p_TokenLiteral;
@@ -16,8 +16,8 @@ namespace nolang
     [[nodiscard]] auto
     LookupIdentifier(const std::string& lexeme) -> TokenType
     {
-        if(nolang::keywords.find(lexeme) == nolang::keywords.end())
+        if(noscript::keywords.find(lexeme) == noscript::keywords.end())
             return TokenType::IDENT;
-        return nolang::keywords.at(lexeme);
+        return noscript::keywords.at(lexeme);
     }
 }

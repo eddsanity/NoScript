@@ -1,6 +1,6 @@
 #include <Lexer.hpp>
 
-namespace nolang
+namespace noscript
 {
     Lexer::Lexer(const std::string &p_LexerInput) noexcept
     {
@@ -67,9 +67,9 @@ namespace nolang
     }
 
     [[nodiscard]] auto
-    Lexer::NextToken() noexcept -> nolang::Token
+    Lexer::NextToken() noexcept -> noscript::Token
     {
-        nolang::Token result_token;
+        noscript::Token result_token;
 
         this->ConsumeSpace();
 
@@ -168,7 +168,7 @@ namespace nolang
             if (IsLetter(lex_char))
             {
                 auto word = this->ReadWord();
-                auto wordTokenType = nolang::LookupIdentifier(word);
+                auto wordTokenType = noscript::LookupIdentifier(word);
                 result_token = Token(wordTokenType, word);
                 return result_token;
             }

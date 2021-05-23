@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-namespace nolang
+namespace noscript
 {
     enum class TokenType
     {

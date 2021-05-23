@@ -24,12 +24,12 @@ auto main() -> int
                               " " \
                               "num1 = &num2;" \
                               "num2 = |num2;";
-    nolang::Lexer lexer{lexer_input};
-    std::vector<nolang::Token> tokens;
+    noscript::Lexer lexer{lexer_input};
+    std::vector<noscript::Token> tokens;
     
-    for (auto curr_token = lexer.NextToken(); curr_token.m_TokenType != nolang::TokenType::EndOfFile; curr_token = lexer.NextToken())
+    for (auto curr_token = lexer.NextToken(); curr_token.m_TokenType != noscript::TokenType::EndOfFile; curr_token = lexer.NextToken())
     {
-        // std::cout << "{" << nolang::EnumAsString(curr_token.m_TokenType) << ", \"" << curr_token.m_TokenLiteral << "\"}\n";
+        // std::cout << "{" << noscript::EnumAsString(curr_token.m_TokenType) << ", \"" << curr_token.m_TokenLiteral << "\"}\n";
         tokens.push_back(curr_token);
     }
     return 0;

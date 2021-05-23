@@ -7,7 +7,7 @@
 #include <Token.hpp>
 #include <utility.hpp>
 
-namespace nolang
+namespace noscript
 {
 
     /*
@@ -26,7 +26,7 @@ namespace nolang
     private:
         // advance the "file pointers" by consuming characters
         auto ConsumeChar() noexcept -> void;
-        // skip over space or space-like characters since they carry no significance in nolang
+        // skip over space or space-like characters since they carry no significance in noscript
         auto ConsumeSpace() noexcept -> void;
         [[nodiscard]] auto ReadWord() noexcept -> std::string;
         [[nodiscard]] auto ReadInteger() noexcept -> std::string;
@@ -39,7 +39,7 @@ namespace nolang
 
         Lexer(const std::string &) noexcept;
 
-        [[nodiscard]] auto NextToken() noexcept -> nolang::Token;
+        [[nodiscard]] auto NextToken() noexcept -> noscript::Token;
 
         std::string m_LexerInput;
         uint32_t m_LexerCurrPos;
