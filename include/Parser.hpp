@@ -14,6 +14,7 @@ namespace noscript
         auto ConsumeToken() noexcept -> void;
         [[nodiscard]] auto ParseStatement() noexcept -> Statement *;
         [[nodiscard]] auto ParseLetStatement() noexcept -> Statement *;
+        [[nodiscard]] auto ParseRetStatement() noexcept -> Statement *;
         [[nodiscard]] auto ParseIdentifier() noexcept -> Identifier *;
         [[nodiscard]] auto ParseExpression() noexcept -> Expression *;
 

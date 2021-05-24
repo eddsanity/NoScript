@@ -13,7 +13,7 @@ namespace noscript
 
     Program::~Program() noexcept
     {
-        for(auto stmt_ptr : m_Statements)
+        for (auto stmt_ptr : m_Statements)
             delete stmt_ptr;
     }
 
@@ -23,5 +23,10 @@ namespace noscript
         return m_Token.m_TokenLiteral;
     }
 
-    
+    [[nodiscard]] auto
+    RetStatement::TokenLiteral() -> string
+    {
+        return m_Token.m_TokenLiteral;
+    }
+
 }

@@ -42,6 +42,8 @@ namespace noscript
         {
         case TokenType::LET:
             return this->ParseLetStatement();
+        case TokenType::RETURN:
+            return this->ParseRetStatement();
         default:
             return nullptr;
         }
@@ -51,14 +53,15 @@ namespace noscript
     Parser::ParseLetStatement() noexcept -> Statement *
     {
         LetStatement *let_stmt = new LetStatement();
+        let_stmt->m_Token = m_ParserCurrToken;
         Identifier *stmt_identifier = new Identifier();
         Expression *stmt_value = nullptr;
 
         // Move past the LET token
         this->ConsumeToken();
-        
+
         // If the token immediately after the LET isn't an identifier, catch the error.
-        if(m_ParserCurrToken.m_TokenType != TokenType::IDENT)
+        if (m_ParserCurrToken.m_TokenType != TokenType::IDENT)
         {
             m_ErrorLogger.errlog("Syntax Error", "Expected an identifier in LET statement");
             return nullptr;
@@ -82,10 +85,41 @@ namespace noscript
 
         stmt_value = nullptr;
 
+        // Move past the rhs-expression token
+        // this->ConsumeToken();
+        while(m_ParserCurrToken.m_TokenType != TokenType::SEMICOLON)
+            this->ConsumeToken();
+
         let_stmt->m_IdentifierName = stmt_identifier;
         let_stmt->m_IdentifierValue = stmt_value;
-        let_stmt->m_Token = m_ParserCurrToken;
         return let_stmt;
+    }
+
+    [[nodiscard]] auto
+    Parser::ParseRetStatement() noexcept -> Statement *
+    {
+        RetStatement *ret_stmt = new RetStatement();
+        ret_stmt->m_Token = m_ParserCurrToken;
+        Expression *stmt_value = nullptr;
+
+        // Move past the RETURN token
+        this->ConsumeToken();
+
+        stmt_value = nullptr;
+
+        // Move past the return expression token
+        // this->ConsumeToken();
+        while(m_ParserCurrToken.m_TokenType != TokenType::SEMICOLON)
+            this->ConsumeToken();
+
+        if(m_ParserCurrToken.m_TokenType != TokenType::SEMICOLON)
+        {
+            m_ErrorLogger.errlog("Missing semicolon", "Expecting a semicolo");
+            return nullptr;
+        }
+
+        ret_stmt->m_ReturnValue = stmt_value;
+        return ret_stmt;
     }
 
     // [[nodiscard]] auto
