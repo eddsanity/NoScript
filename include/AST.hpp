@@ -19,7 +19,7 @@ namespace noscript
 
         basically, 
         <Program> = <Statements>
-        <Statements> = <statement> { <Statements> }
+        <Statements> = <Statement> ";" { <Statements> }
         <Statement>  = <LetStatement> |
                        <RetStatement> |
                        ..
@@ -29,7 +29,7 @@ namespace noscript
     public:
         [[nodiscard]] auto TokenLiteral() -> string;
 
-        vector<Statement*> m_Statements;
+        vector<Statement *> m_Statements;
 
         ~Program() noexcept;
     };
@@ -49,8 +49,24 @@ namespace noscript
         [[nodiscard]] auto TokenLiteral() -> string;
 
         Token m_Token;
-        Identifier* m_IdentifierName;
-        Expression* m_IdentifierValue;
+        Identifier *m_IdentifierName;
+        Expression *m_IdentifierValue;
+    };
+
+    /*
+        ReturnStatement Node
+        A return statement is strictly the keyword 'return' and an expression that's evaluated and then the resulting literal
+        value is returned.
+
+        <RetStatement> = "return" <Expression>
+    */
+    class RetStatement : public Statement
+    {
+    public:
+        [[nodiscard]] auto TokenLiteral() -> string;
+
+        Token m_Token;
+        Expression *m_ReturnValue;
     };
 }
 

@@ -29,8 +29,6 @@ namespace noscript
             if (stmt != nullptr)
                 program_node->m_Statements.push_back(stmt);
 
-            // TODO: Add error logging if statement is nullptr
-
             this->ConsumeToken();
         }
 
