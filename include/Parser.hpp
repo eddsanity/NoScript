@@ -11,6 +11,10 @@ namespace noscript
     {
     private:
         auto ConsumeToken() noexcept -> void;
+        [[nodiscard]] auto ParseStatement() noexcept -> Statement *;
+        [[nodiscard]] auto ParseLetStatement() noexcept -> Statement *;
+        [[nodiscard]] auto ParseIdentifier() noexcept -> Identifier *;
+        [[nodiscard]] auto ParseExpression() noexcept -> Expression *;
 
     public:
         Parser() = delete;
@@ -20,11 +24,11 @@ namespace noscript
         Parser &operator=(Parser &&) = delete;
 
         Parser(Lexer *p_Lexer) noexcept;
-        auto ParseProgram() noexcept -> Program *;
+        [[nodiscard]] auto ParseProgram() noexcept -> Program *;
 
         Token m_ParserCurrToken;
         Token m_ParserPeekToken;
-        unique_ptr<Lexer> m_Lexer;
+        Lexer *m_Lexer;
     };
 }
 
