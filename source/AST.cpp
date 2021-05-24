@@ -11,9 +11,17 @@ namespace noscript
             return "";
     }
 
+    Program::~Program() noexcept
+    {
+        for(auto stmt_ptr : m_Statements)
+            delete stmt_ptr;
+    }
+
     [[nodiscard]] auto
     LetStatement::TokenLiteral() -> string
     {
         return m_Token.m_TokenLiteral;
     }
+
+    
 }
