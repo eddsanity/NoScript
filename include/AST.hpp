@@ -1,7 +1,6 @@
 #ifndef AST_HPP
 #define AST_HPP
 
-#include <memory>
 #include <vector>
 
 #include <Token.hpp>
@@ -11,7 +10,6 @@
 namespace noscript
 {
     using std::string;
-    using std::unique_ptr;
     using std::vector;
     /*
         AST Root.
@@ -31,7 +29,9 @@ namespace noscript
     public:
         [[nodiscard]] auto TokenLiteral() -> string;
 
-        vector<unique_ptr<Statement>> m_Statements;
+        vector<Statement*> m_Statements;
+
+        ~Program() noexcept;
     };
 
     /*
@@ -49,8 +49,8 @@ namespace noscript
         [[nodiscard]] auto TokenLiteral() -> string;
 
         Token m_Token;
-        Identifier m_IdentifierName;
-        unique_ptr<Expression> m_IdentifierValue;
+        Identifier* m_IdentifierName;
+        Expression* m_IdentifierValue;
     };
 }
 
