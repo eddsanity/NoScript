@@ -4,7 +4,7 @@ namespace noscript
 {
     Parser::Parser(Lexer *p_Lexer) noexcept
     {
-        m_Lexer = std::make_unique<Lexer>(p_Lexer);
+        m_Lexer = unique_ptr<Lexer>(p_Lexer);
 
         this->ConsumeToken();
         this->ConsumeToken();
@@ -18,7 +18,7 @@ namespace noscript
     }
 
     [[nodiscard]] auto
-    Parser::ParseProgram() -> Program *
+    Parser::ParseProgram() noexcept -> Program *
     {
         return nullptr;
     }
