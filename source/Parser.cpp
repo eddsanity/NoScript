@@ -62,7 +62,7 @@ namespace noscript
         // If the token immediately after the LET isn't an identifier, catch the error.
         if(m_ParserCurrToken.m_TokenType != TokenType::IDENT)
         {
-            // TODO: Error logger raises error
+            m_ErrorLogger.errlog("Syntax Error", "Expected an identifier in LET statement");
             return nullptr;
         }
 
@@ -75,7 +75,7 @@ namespace noscript
         // If the token immediately after the identifier isn't an assignment operator, catch the error.
         if (m_ParserCurrToken.m_TokenType != TokenType::ASSIGN)
         {
-            // TODO: Error logger raises error
+            m_ErrorLogger.errlog("Syntax Error", "Expected an assignment operator in LET statement");
             return nullptr;
         }
 

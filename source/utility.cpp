@@ -85,6 +85,8 @@ namespace noscript
                 return "TokenType::ILLEGAL";
             case TokenType::EndOfFile:
                 return "TokenType::EndOfFile";
+            default:
+                return "Unknown Token Type";
         }
     }
 }

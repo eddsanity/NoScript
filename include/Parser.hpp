@@ -4,6 +4,7 @@
 #include <Lexer.hpp>
 #include <AST.hpp>
 #include <Token.hpp>
+#include <ErrorLogger.hpp>
 
 namespace noscript
 {
@@ -29,6 +30,7 @@ namespace noscript
         Token m_ParserCurrToken;
         Token m_ParserPeekToken;
         Lexer *m_Lexer;
+        ErrorLogger m_ErrorLogger;
     };
 }
 

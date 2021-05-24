@@ -71,6 +71,7 @@ namespace noscript
             Other
         */
         EndOfFile,
+        NOTSET,
         ILLEGAL
     };
 
