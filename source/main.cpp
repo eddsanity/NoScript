@@ -26,16 +26,24 @@ auto main() -> int
     //                           "num1 = &num2;" \
     //                           "num2 = |num2;";
 
-    std::string lexer_input = "let x = 5;" \
-                              "let y = 10;" \
-                              "let foobar = 838383;";
+    // std::string lexer_input = "let x = 5;" \
+    //                           "let y = 10;" \
+    //                           "let foobar = 838383;" \
+    //                           "return my_var;" \
+    //                           "return 5050;" \
+    //                           "return (e^x);";
+    std::string lexer_input = "foobar;" \
+                              "x;";
     noscript::Lexer lexer{lexer_input};
     noscript::Parser parser(&lexer);
 
     auto program = parser.ParseProgram();
-    std::cout << "IDENTIFIERS: \n";
+    
     for(auto& stmt : program->m_Statements)
-        std::cout << ((noscript::LetStatement*)(stmt))->m_IdentifierName->m_Value << std::endl;
+        std::cout << stmt->TokenLiteral() << std::endl;
+    // std::cout << "IDENTIFIERS: \n";
+    // for(auto& stmt : program->m_Statements)
+    //     std::cout << stmt->TokenLiteral() << std::endl;
     
     // std::vector<noscript::Token> tokens;
     
