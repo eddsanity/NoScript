@@ -2,21 +2,6 @@
 
 namespace noscript
 {
-    Parser::Parser(Lexer *p_Lexer) noexcept
-    {
-        m_Lexer = p_Lexer;
-
-        this->ConsumeToken();
-        this->ConsumeToken();
-    }
-
-    auto
-    Parser::ConsumeToken() noexcept -> void
-    {
-        m_ParserCurrToken = m_ParserPeekToken;
-        m_ParserPeekToken = m_Lexer->NextToken();
-    }
-
     [[nodiscard]] auto
     Parser::ParseProgram() noexcept -> Program *
     {
@@ -45,7 +30,7 @@ namespace noscript
         case TokenType::RETURN:
             return this->ParseRetStatement();
         default:
-            return nullptr;
+            return this->ParseExpressionStatement();
         }
     }
 
@@ -122,13 +107,34 @@ namespace noscript
         return ret_stmt;
     }
 
-    // [[nodiscard]] auto
-    // Parser::ParseExpression() noexcept -> Expression *
-    // {
-    //     switch (m_ParserCurrToken.m_TokenType)
-    //     {
-    //     case TokenType::INT:
-    //         if (m_ParserPeekToken.m_TokenType ==)
-    //     }
-    // }
+    [[nodiscard]] auto
+    Parser::ParseExpressionStatement() noexcept -> ExpressionStatement *
+    {
+        ExpressionStatement *expr_stmt = new ExpressionStatement();
+        expr_stmt->m_Token = m_ParserCurrToken;
+
+        expr_stmt->m_Expression = this->ParseExpression(LOWEST);
+
+        if(m_ParserPeekToken.m_TokenType == TokenType::SEMICOLON)
+            this->ConsumeToken();
+        
+        return expr_stmt;
+    }
+
+    [[nodiscard]] auto
+    Parser::ParseExpression(int p_precedence) noexcept -> Expression *
+    {
+        /* 
+            If there are no parse functions associated with the token type, return null
+        */
+        if(m_PrefixParseFunctions.find(m_ParserCurrToken.m_TokenType) == m_PrefixParseFunctions.end())
+            return nullptr;
+        
+        /*
+            If there is a parse function associated with the token type, get that function and execute it
+            and return whatever it returns
+        */
+        auto left_expression = m_PrefixParseFunctions.at(m_ParserCurrToken.m_TokenType)(*this);
+        return left_expression;
+    }
 }
