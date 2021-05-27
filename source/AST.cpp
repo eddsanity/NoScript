@@ -2,6 +2,12 @@
 
 namespace noscript
 {
+    Program::~Program() noexcept
+    {
+        for (auto stmt_ptr : m_Statements)
+            delete stmt_ptr;
+    }
+
     [[nodiscard]] auto
     Program::TokenLiteral() -> string
     {
@@ -11,10 +17,27 @@ namespace noscript
             return "";
     }
 
-    Program::~Program() noexcept
+    [[nodiscard]] auto
+    Program::ToString() -> string
     {
-        for (auto stmt_ptr : m_Statements)
-            delete stmt_ptr;
+        string output_string = "";
+        for(auto& stmt : m_Statements)
+            output_string += stmt->ToString();
+        return output_string;
+    }
+
+    [[nodiscard]] auto
+    ExpressionStatement::TokenLiteral() -> string
+    {
+        return m_Token.m_TokenLiteral;
+    }
+
+    [[nodiscard]] auto
+    ExpressionStatement::ToString() -> string
+    {
+        if(m_Expression != nullptr)
+            return m_Expression->ToString();
+        return "";
     }
 
     [[nodiscard]] auto
@@ -24,9 +47,37 @@ namespace noscript
     }
 
     [[nodiscard]] auto
+    LetStatement::ToString() -> string
+    {
+        string output_string("");
+        output_string += this->TokenLiteral() + " ";
+        output_string += m_IdentifierName->ToString();
+        output_string += " = ";
+
+        if(m_IdentifierValue != nullptr)
+            output_string += m_IdentifierValue->ToString();
+        
+        output_string += ";";
+        return output_string;
+    }
+
+    [[nodiscard]] auto
     RetStatement::TokenLiteral() -> string
     {
         return m_Token.m_TokenLiteral;
+    }
+
+    [[nodiscard]] auto
+    RetStatement::ToString() -> string
+    {
+        string output_string("");
+        output_string += this->TokenLiteral() + " ";
+
+        if(m_ReturnValue != nullptr)
+            output_string += m_ReturnValue->ToString();
+
+        output_string += ";";
+        return output_string;
     }
 
 }
