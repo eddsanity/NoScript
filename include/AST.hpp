@@ -2,6 +2,7 @@
 #define AST_HPP
 
 #include <vector>
+#include <ostream>
 
 #include <Token.hpp>
 #include <Node.hpp>
@@ -28,10 +29,21 @@ namespace noscript
     {
     public:
         [[nodiscard]] auto TokenLiteral() -> string;
+        [[nodiscard]] auto ToString() -> string;
 
         vector<Statement *> m_Statements;
 
         ~Program() noexcept;
+    };
+
+    class ExpressionStatement : public Statement
+    {
+    public:
+        [[nodiscard]] auto TokenLiteral() -> string;
+        [[nodiscard]] auto ToString() -> string;
+
+        Token m_Token;
+        Expression *m_Expression;
     };
 
     /*
@@ -47,6 +59,7 @@ namespace noscript
     {
     public:
         [[nodiscard]] auto TokenLiteral() -> string;
+        [[nodiscard]] auto ToString() -> string;
 
         Token m_Token;
         Identifier *m_IdentifierName;
@@ -64,6 +77,7 @@ namespace noscript
     {
     public:
         [[nodiscard]] auto TokenLiteral() -> string;
+        [[nodiscard]] auto ToString() -> string;
 
         Token m_Token;
         Expression *m_ReturnValue;

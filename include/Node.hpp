@@ -9,6 +9,7 @@ namespace noscript
     {
     public:
         virtual std::string TokenLiteral() = 0;
+        virtual std::string ToString() = 0;
     };
 
     class Statement : public Node
