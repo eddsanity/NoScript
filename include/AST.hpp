@@ -28,8 +28,8 @@ namespace noscript
     class Program : public Node
     {
     public:
-        [[nodiscard]] auto TokenLiteral() -> string;
-        [[nodiscard]] auto ToString() -> string;
+        auto TokenLiteral() -> string;
+        auto ToString() -> string;
 
         vector<Statement *> m_Statements;
 
@@ -39,11 +39,21 @@ namespace noscript
     class ExpressionStatement : public Statement
     {
     public:
-        [[nodiscard]] auto TokenLiteral() -> string;
-        [[nodiscard]] auto ToString() -> string;
+        auto TokenLiteral() -> string;
+        auto ToString() -> string;
 
         Token m_Token;
         Expression *m_Expression;
+    };
+
+    class IntegerLiteral : public Expression
+    {
+    public:
+        auto TokenLiteral() -> string;
+        auto ToString() -> string;
+
+        Token m_Token;
+        uint64_t m_Int64Value;
     };
 
     /*
@@ -58,8 +68,8 @@ namespace noscript
     class LetStatement : public Statement
     {
     public:
-        [[nodiscard]] auto TokenLiteral() -> string;
-        [[nodiscard]] auto ToString() -> string;
+        auto TokenLiteral() -> string;
+        auto ToString() -> string;
 
         Token m_Token;
         Identifier *m_IdentifierName;
@@ -76,8 +86,8 @@ namespace noscript
     class RetStatement : public Statement
     {
     public:
-        [[nodiscard]] auto TokenLiteral() -> string;
-        [[nodiscard]] auto ToString() -> string;
+        auto TokenLiteral() -> string;
+        auto ToString() -> string;
 
         Token m_Token;
         Expression *m_ReturnValue;

@@ -21,8 +21,8 @@ namespace noscript
         Error(const std::string &) noexcept;
         Error(const std::string &, const std::string &) noexcept;
         Error(const std::string &, const std::string &, const Token &, const Token &) noexcept;
-        
-        [[nodiscard]] auto ToString() const noexcept -> std::string;
+
+        auto ToString() const noexcept -> std::string;
     };
 }
 

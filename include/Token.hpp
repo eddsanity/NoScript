@@ -75,9 +75,8 @@ namespace noscript
         ILLEGAL
     };
 
-
-    [[nodiscard]] auto
-    LookupIdentifier(const std::string& lexeme) -> TokenType;
+    auto
+    LookupIdentifier(const std::string &lexeme) -> TokenType;
 
     const std::map<std::string, TokenType> keywords =
         {
@@ -97,7 +96,7 @@ namespace noscript
     {
     public:
         Token() noexcept = default;
-        Token(const TokenType&, const std::string &) noexcept;
+        Token(const TokenType &, const std::string &) noexcept;
 
         TokenType m_TokenType;
         std::string m_TokenLiteral;

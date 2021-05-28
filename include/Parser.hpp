@@ -27,11 +27,11 @@ namespace noscript
         auto ConsumeToken() noexcept -> void;
         auto PutPrefix(TokenType, func_PrefixParse) -> void;
         auto PutInfix(TokenType, func_InfixParse) -> void;
-        [[nodiscard]] auto ParseStatement() noexcept -> Statement *;
-        [[nodiscard]] auto ParseLetStatement() noexcept -> Statement *;
-        [[nodiscard]] auto ParseRetStatement() noexcept -> Statement *;
-        [[nodiscard]] auto ParseExpression(int) noexcept -> Expression *;
-        [[nodiscard]] auto ParseExpressionStatement() noexcept -> ExpressionStatement *;
+        auto ParseStatement() noexcept -> Statement *;
+        auto ParseLetStatement() noexcept -> Statement *;
+        auto ParseRetStatement() noexcept -> Statement *;
+        auto ParseExpression(int) noexcept -> Expression *;
+        auto ParseExpressionStatement() noexcept -> ExpressionStatement *;
 
         ErrorLogger m_ErrorLogger;
         std::map<TokenType, func_PrefixParse> m_PrefixParseFunctions;
@@ -45,7 +45,7 @@ namespace noscript
         Parser &operator=(Parser &&) = delete;
 
         Parser(Lexer *p_Lexer) noexcept;
-        [[nodiscard]] auto ParseProgram() noexcept -> Program *;
+        auto ParseProgram() noexcept -> Program *;
 
         Token m_ParserCurrToken;
         Token m_ParserPeekToken;

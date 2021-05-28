@@ -2,7 +2,7 @@
 
 namespace noscript
 {
-    [[nodiscard]] auto
+    auto
     Parser::ParseProgram() noexcept -> Program *
     {
         Program *program_node = new Program();
@@ -20,7 +20,7 @@ namespace noscript
         return program_node;
     }
 
-    [[nodiscard]] auto
+    auto
     Parser::ParseStatement() noexcept -> Statement *
     {
         switch (m_ParserCurrToken.m_TokenType)
@@ -34,7 +34,7 @@ namespace noscript
         }
     }
 
-    [[nodiscard]] auto
+    auto
     Parser::ParseLetStatement() noexcept -> Statement *
     {
         LetStatement *let_stmt = new LetStatement();
@@ -72,7 +72,7 @@ namespace noscript
 
         // Move past the rhs-expression token
         // this->ConsumeToken();
-        while(m_ParserCurrToken.m_TokenType != TokenType::SEMICOLON)
+        while (m_ParserCurrToken.m_TokenType != TokenType::SEMICOLON)
             this->ConsumeToken();
 
         let_stmt->m_IdentifierName = stmt_identifier;
@@ -80,7 +80,7 @@ namespace noscript
         return let_stmt;
     }
 
-    [[nodiscard]] auto
+    auto
     Parser::ParseRetStatement() noexcept -> Statement *
     {
         RetStatement *ret_stmt = new RetStatement();
@@ -94,10 +94,10 @@ namespace noscript
 
         // Move past the return expression token
         // this->ConsumeToken();
-        while(m_ParserCurrToken.m_TokenType != TokenType::SEMICOLON)
+        while (m_ParserCurrToken.m_TokenType != TokenType::SEMICOLON)
             this->ConsumeToken();
 
-        if(m_ParserCurrToken.m_TokenType != TokenType::SEMICOLON)
+        if (m_ParserCurrToken.m_TokenType != TokenType::SEMICOLON)
         {
             m_ErrorLogger.errlog("Missing semicolon", "Expecting a semicolo");
             return nullptr;
@@ -107,7 +107,7 @@ namespace noscript
         return ret_stmt;
     }
 
-    [[nodiscard]] auto
+    auto
     Parser::ParseExpressionStatement() noexcept -> ExpressionStatement *
     {
         ExpressionStatement *expr_stmt = new ExpressionStatement();
@@ -115,21 +115,21 @@ namespace noscript
 
         expr_stmt->m_Expression = this->ParseExpression(LOWEST);
 
-        if(m_ParserPeekToken.m_TokenType == TokenType::SEMICOLON)
+        if (m_ParserPeekToken.m_TokenType == TokenType::SEMICOLON)
             this->ConsumeToken();
-        
+
         return expr_stmt;
     }
 
-    [[nodiscard]] auto
+    auto
     Parser::ParseExpression(int p_precedence) noexcept -> Expression *
     {
         /* 
             If there are no parse functions associated with the token type, return null
         */
-        if(m_PrefixParseFunctions.find(m_ParserCurrToken.m_TokenType) == m_PrefixParseFunctions.end())
+        if (m_PrefixParseFunctions.find(m_ParserCurrToken.m_TokenType) == m_PrefixParseFunctions.end())
             return nullptr;
-        
+
         /*
             If there is a parse function associated with the token type, get that function and execute it
             and return whatever it returns

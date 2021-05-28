@@ -7,8 +7,8 @@
 
 namespace noscript
 {
-    [[nodiscard]] auto
-    ParseIdentifier(Parser& p_parser) noexcept -> Expression *;
+    auto
+    ParseIdentifier(Parser &p_parser) noexcept -> Expression *;
 }
 
 #endif

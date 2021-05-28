@@ -5,13 +5,13 @@
 
 namespace noscript
 {
-    [[nodiscard]] auto
+    auto
     IsLetter(char p_byte) noexcept -> bool;
 
-    [[nodiscard]] auto
+    auto
     IsDigit(char p_byte) noexcept -> bool;
 
-    [[nodiscard]] auto
+    auto
     EnumAsString(TokenType p_token) noexcept -> std::string;
 }
 

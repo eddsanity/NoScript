@@ -27,7 +27,7 @@ namespace noscript
             p_outstream << err.ToString();
     }
 
-    [[nodiscard]] auto
+    auto
     ErrorLogger::GetErrLogs() const noexcept -> std::string
     {
         std::string output = "";
@@ -35,19 +35,19 @@ namespace noscript
             output += err.ToString();
         return output;
     }
-    
-    [[nodiscard]] auto
+
+    auto
     ErrorLogger::GetFirstError() const noexcept -> std::string
     {
-        if(m_ErrorLog.size() >= 1)
+        if (m_ErrorLog.size() >= 1)
             return m_ErrorLog[0].ToString();
         return "";
     }
 
-    [[nodiscard]] auto
+    auto
     ErrorLogger::GetMostRecentError() const noexcept -> std::string
     {
-        if(m_ErrorLog.size() >= 1)
+        if (m_ErrorLog.size() >= 1)
             return m_ErrorLog[m_ErrorLog.size() - 1].ToString();
         return "";
     }

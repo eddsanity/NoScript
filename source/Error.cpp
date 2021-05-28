@@ -25,19 +25,19 @@ namespace noscript
         m_TokenFound = p_ActualToken;
     }
 
-    [[nodiscard]] auto
+    auto
     Error::ToString() const noexcept -> std::string
     {
         if (m_TokenExpected.m_TokenType != TokenType::NOTSET && m_TokenFound.m_TokenType != TokenType::NOTSET)
             return "- " + m_ErrorHeader + ": " +
-                         m_ErrorMessage + 
-                         ".\n\tExpected: " + EnumAsString(m_TokenExpected.m_TokenType) + 
-                         ", \tFound: " + EnumAsString(m_TokenFound.m_TokenType) + ".\n";
-        
+                   m_ErrorMessage +
+                   ".\n\tExpected: " + EnumAsString(m_TokenExpected.m_TokenType) +
+                   ", \tFound: " + EnumAsString(m_TokenFound.m_TokenType) + ".\n";
+
         if (m_ErrorHeader.empty())
             return "- Error: " + m_ErrorMessage + ".\n";
-        
+
         return "- " + m_ErrorHeader + ": " +
-                      m_ErrorMessage + ".\n";
+               m_ErrorMessage + ".\n";
     }
 }

@@ -38,35 +38,35 @@ namespace noscript
             this->ConsumeChar();
     }
 
-    [[nodiscard]] auto
+    auto
     Lexer::ReadWord() noexcept -> std::string
     {
         uint32_t start_pos = m_LexerCurrPos;
-        while(IsLetter(m_LexerChar) || IsDigit(m_LexerChar))
+        while (IsLetter(m_LexerChar) || IsDigit(m_LexerChar))
             this->ConsumeChar();
 
         return m_LexerInput.substr(start_pos, m_LexerCurrPos - start_pos);
     }
 
-    [[nodiscard]] auto
+    auto
     Lexer::ReadInteger() noexcept -> std::string
     {
         uint32_t start_pos = m_LexerCurrPos;
-        while(IsDigit(m_LexerChar))
+        while (IsDigit(m_LexerChar))
             this->ConsumeChar();
 
         return m_LexerInput.substr(start_pos, m_LexerCurrPos - start_pos);
     }
 
-    [[nodiscard]] auto
+    auto
     Lexer::Lookahead() const noexcept -> char
     {
-        if(m_LexerPeekPos >= m_LexerInput.length())
+        if (m_LexerPeekPos >= m_LexerInput.length())
             return 0;
         return m_LexerInput[m_LexerPeekPos];
     }
 
-    [[nodiscard]] auto
+    auto
     Lexer::NextToken() noexcept -> noscript::Token
     {
         noscript::Token result_token;

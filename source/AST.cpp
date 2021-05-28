@@ -8,7 +8,7 @@ namespace noscript
             delete stmt_ptr;
     }
 
-    [[nodiscard]] auto
+    auto
     Program::TokenLiteral() -> string
     {
         if (m_Statements.size() > 0)
@@ -17,36 +17,48 @@ namespace noscript
             return "";
     }
 
-    [[nodiscard]] auto
+    auto
     Program::ToString() -> string
     {
         string output_string = "";
-        for(auto& stmt : m_Statements)
+        for (auto &stmt : m_Statements)
             output_string += stmt->ToString();
         return output_string;
     }
 
-    [[nodiscard]] auto
+    auto
     ExpressionStatement::TokenLiteral() -> string
     {
         return m_Token.m_TokenLiteral;
     }
 
-    [[nodiscard]] auto
+    auto
     ExpressionStatement::ToString() -> string
     {
-        if(m_Expression != nullptr)
+        if (m_Expression != nullptr)
             return m_Expression->ToString();
         return "";
     }
 
-    [[nodiscard]] auto
+    auto
+    IntegerLiteral::TokenLiteral() -> string
+    {
+        return m_Token.m_TokenLiteral;
+    }
+
+    auto
+    IntegerLiteral::ToString() -> string
+    {
+        return m_Token.m_TokenLiteral;
+    }
+
+    auto
     LetStatement::TokenLiteral() -> string
     {
         return m_Token.m_TokenLiteral;
     }
 
-    [[nodiscard]] auto
+    auto
     LetStatement::ToString() -> string
     {
         string output_string("");
@@ -54,26 +66,26 @@ namespace noscript
         output_string += m_IdentifierName->ToString();
         output_string += " = ";
 
-        if(m_IdentifierValue != nullptr)
+        if (m_IdentifierValue != nullptr)
             output_string += m_IdentifierValue->ToString();
-        
+
         output_string += ";";
         return output_string;
     }
 
-    [[nodiscard]] auto
+    auto
     RetStatement::TokenLiteral() -> string
     {
         return m_Token.m_TokenLiteral;
     }
 
-    [[nodiscard]] auto
+    auto
     RetStatement::ToString() -> string
     {
         string output_string("");
         output_string += this->TokenLiteral() + " ";
 
-        if(m_ReturnValue != nullptr)
+        if (m_ReturnValue != nullptr)
             output_string += m_ReturnValue->ToString();
 
         output_string += ";";

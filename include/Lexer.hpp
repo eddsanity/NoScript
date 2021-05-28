@@ -28,9 +28,9 @@ namespace noscript
         auto ConsumeChar() noexcept -> void;
         // skip over space or space-like characters since they carry no significance in noscript
         auto ConsumeSpace() noexcept -> void;
-        [[nodiscard]] auto ReadWord() noexcept -> std::string;
-        [[nodiscard]] auto ReadInteger() noexcept -> std::string;
-        [[nodiscard]] auto Lookahead() const noexcept -> char;
+        auto ReadWord() noexcept -> std::string;
+        auto ReadInteger() noexcept -> std::string;
+        auto Lookahead() const noexcept -> char;
 
     public:
         Lexer() = delete;
@@ -39,7 +39,7 @@ namespace noscript
 
         Lexer(const std::string &) noexcept;
 
-        [[nodiscard]] auto NextToken() noexcept -> noscript::Token;
+        auto NextToken() noexcept -> noscript::Token;
 
         std::string m_LexerInput;
         uint32_t m_LexerCurrPos;
