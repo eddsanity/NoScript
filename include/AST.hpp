@@ -53,7 +53,7 @@ namespace noscript
         auto ToString() -> string;
 
         Token m_Token;
-        uint64_t m_Int64Value;
+        int64_t m_Int64Value;
     };
 
     /*
