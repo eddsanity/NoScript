@@ -7,20 +7,10 @@
 #include <Token.hpp>
 #include <ErrorLogger.hpp>
 #include <ParserTypes.hpp>
+#include <PrecedenceTable.hpp>
 
 namespace noscript
 {
-    enum ExpressionPrecedence
-    {
-        LOWEST = 0,
-        EQUALS = 1,
-        LESSGREATER = 2,
-        ADD = 3,
-        MUL = 4,
-        PREFIX = 5,
-        CALL = 6
-    };
-
     class Parser
     {
     private:
