@@ -10,14 +10,14 @@ namespace noscript
 
     /*
         Determines whether a given lexeme is a keyword or not.
-        Returns the keyword if it's a keyword, returns TokenType::IDENT if it isn't.
-        Returning TokenType::IDENT signifies that the lexeme can be used as an identifier (variable name)
+        Returns the keyword if it's a keyword, returns TokenType::TOKEN_IDENT if it isn't.
+        Returning TokenType::TOKEN_IDENT signifies that the lexeme can be used as an identifier (variable name)
     */
     auto
     LookupIdentifier(const std::string &lexeme) -> TokenType
     {
         if (noscript::keywords.find(lexeme) == noscript::keywords.end())
-            return TokenType::IDENT;
+            return TokenType::TOKEN_IDENT;
         return noscript::keywords.at(lexeme);
     }
 }

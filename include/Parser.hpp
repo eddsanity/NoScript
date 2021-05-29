@@ -28,7 +28,7 @@ namespace noscript
         auto PutPrefix(TokenType, func_PrefixParse) -> void;
         auto PutInfix(TokenType, func_InfixParse) -> void;
         auto ParseStatement() noexcept -> Statement *;
-        auto ParseLetStatement() noexcept -> Statement *;
+        
         auto ParseRetStatement() noexcept -> Statement *;
         auto ParseExpression(int) noexcept -> Expression *;
         auto ParseExpressionStatement() noexcept -> ExpressionStatement *;
@@ -44,6 +44,7 @@ namespace noscript
         Parser &operator=(Parser &&) = delete;
 
         Parser(Lexer *p_Lexer) noexcept;
+        auto ParseLetStatement() noexcept -> Statement *;
         auto ParseProgram() noexcept -> Program *;
 
         ErrorLogger m_ErrorLogger;

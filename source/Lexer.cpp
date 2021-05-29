@@ -81,88 +81,88 @@ namespace noscript
             if (this->Lookahead() == '=')
             {
                 this->ConsumeChar();
-                result_token = Token(TokenType::EQ, "==");
+                result_token = Token(TokenType::TOKEN_EQ, "==");
             }
             else
-                result_token = Token(TokenType::ASSIGN, "=");
+                result_token = Token(TokenType::TOKEN_ASSIGN, "=");
             break;
         case '!':
             if (this->Lookahead() == '=')
             {
                 this->ConsumeChar();
-                result_token = Token(TokenType::NEQ, "!=");
+                result_token = Token(TokenType::TOKEN_NEQ, "!=");
             }
             else
-                result_token = Token(TokenType::NOT, "!");
+                result_token = Token(TokenType::TOKEN_NOT, "!");
             break;
         case '&':
             if (this->Lookahead() == '&')
             {
                 this->ConsumeChar();
-                result_token = Token(TokenType::AND, "&&");
+                result_token = Token(TokenType::TOKEN_AND, "&&");
             }
             else
-                result_token = Token(TokenType::ILLEGAL, "ILLEGAL");
+                result_token = Token(TokenType::TOKEN_ILLEGAL, "ILLEGAL");
             break;
         case '|':
             if (this->Lookahead() == '|')
             {
                 this->ConsumeChar();
-                result_token = Token(TokenType::OR, "||");
+                result_token = Token(TokenType::TOKEN_OR, "||");
             }
             else
-                result_token = Token(TokenType::ILLEGAL, "ILLEGAL");
+                result_token = Token(TokenType::TOKEN_ILLEGAL, "ILLEGAL");
             break;
         case '<':
             if (this->Lookahead() == '=')
             {
                 this->ConsumeChar();
-                result_token = Token(TokenType::LTE, "<=");
+                result_token = Token(TokenType::TOKEN_LTE, "<=");
             }
             else
-                result_token = Token(TokenType::LT, "<");
+                result_token = Token(TokenType::TOKEN_LT, "<");
             break;
         case '>':
             if (this->Lookahead() == '=')
             {
                 this->ConsumeChar();
-                result_token = Token(TokenType::GTE, ">=");
+                result_token = Token(TokenType::TOKEN_GTE, ">=");
             }
             else
-                result_token = Token(TokenType::GT, ">");
+                result_token = Token(TokenType::TOKEN_GT, ">");
             break;
         case '+':
-            result_token = Token(TokenType::PLUS, "+");
+            result_token = Token(TokenType::TOKEN_PLUS, "+");
             break;
         case '-':
-            result_token = Token(TokenType::MINUS, "-");
+            result_token = Token(TokenType::TOKEN_MINUS, "-");
             break;
         case '*':
-            result_token = Token(TokenType::ASTERISK, "*");
+            result_token = Token(TokenType::TOKEN_ASTERISK, "*");
             break;
         case '/':
-            result_token = Token(TokenType::SLASH, "/");
+            result_token = Token(TokenType::TOKEN_SLASH, "/");
             break;
         case ',':
-            result_token = Token(TokenType::COMMA, ",");
+            result_token = Token(TokenType::TOKEN_COMMA, ",");
             break;
         case ';':
-            result_token = Token(TokenType::SEMICOLON, ";");
+            result_token = Token(TokenType::TOKEN_SEMICOLON, ";");
             break;
         case '(':
-            result_token = Token(TokenType::LPAREN, "(");
+            result_token = Token(TokenType::TOKEN_LPAREN, "(");
             break;
         case ')':
-            result_token = Token(TokenType::RPAREN, ")");
+            result_token = Token(TokenType::TOKEN_RPAREN, ")");
             break;
         case '{':
-            result_token = Token(TokenType::LBRACE, "{");
+            result_token = Token(TokenType::TOKEN_LBRACE, "{");
             break;
         case '}':
-            result_token = Token(TokenType::RBRACE, "}");
+            result_token = Token(TokenType::TOKEN_RBRACE, "}");
             break;
         case 0:
-            result_token = Token(TokenType::EndOfFile, "EOF");
+            result_token = Token(TokenType::TOKEN_EOF, "EOF");
             break;
         default:
             if (IsLetter(lex_char))
@@ -175,11 +175,11 @@ namespace noscript
             else if (IsDigit(lex_char))
             {
                 auto word = this->ReadInteger();
-                result_token = Token(TokenType::INT, word);
+                result_token = Token(TokenType::TOKEN_INT, word);
                 return result_token;
             }
             else
-                result_token = Token(TokenType::ILLEGAL, "ILLEGAL");
+                result_token = Token(TokenType::TOKEN_ILLEGAL, "ILLEGAL");
             break;
         }
 

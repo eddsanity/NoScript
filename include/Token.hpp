@@ -12,67 +12,67 @@ namespace noscript
             identifiers and literals
             only supported literal is of type int currently
         */
-        IDENT,
-        INT,
+        TOKEN_IDENT,
+        TOKEN_INT,
 
         /*
             operators
         */
-        ASSIGN,
+        TOKEN_ASSIGN,
 
         /*
             boolean operators
         */
-        NOT,
-        AND,
-        OR,
+        TOKEN_NOT,
+        TOKEN_AND,
+        TOKEN_OR,
 
         /*
             arithmetic operators
         */
-        PLUS,
-        MINUS,
-        ASTERISK,
-        SLASH,
+        TOKEN_PLUS,
+        TOKEN_MINUS,
+        TOKEN_ASTERISK,
+        TOKEN_SLASH,
 
         /*
             comparison operators
         */
-        LT,
-        GT,
-        EQ,
-        NEQ,
-        GTE,
-        LTE,
+        TOKEN_LT,
+        TOKEN_GT,
+        TOKEN_EQ,
+        TOKEN_NEQ,
+        TOKEN_GTE,
+        TOKEN_LTE,
 
         /*
             keywords
         */
-        FUNCTION,
-        LET,
-        TRUE,
-        FALSE,
-        IF,
-        ELSE,
-        RETURN,
-        WHILE,
+        TOKEN_FUNCTION,
+        TOKEN_LET,
+        TOKEN_TRUE,
+        TOKEN_FALSE,
+        TOKEN_IF,
+        TOKEN_ELSE,
+        TOKEN_RETURN,
+        TOKEN_WHILE,
 
         /*
             Delimiters
         */
-        COMMA,
-        SEMICOLON,
-        LPAREN,
-        RPAREN,
-        LBRACE,
-        RBRACE,
+        TOKEN_COMMA,
+        TOKEN_SEMICOLON,
+        TOKEN_LPAREN,
+        TOKEN_RPAREN,
+        TOKEN_LBRACE,
+        TOKEN_RBRACE,
 
         /*
             Other
         */
-        EndOfFile,
-        NOTSET,
-        ILLEGAL
+        TOKEN_EOF,
+        TOKEN_NOTSET,
+        TOKEN_ILLEGAL
     };
 
     auto
@@ -80,14 +80,14 @@ namespace noscript
 
     const std::map<std::string, TokenType> keywords =
         {
-            {"fn", TokenType::FUNCTION},
-            {"let", TokenType::LET},
-            {"true", TokenType::TRUE},
-            {"false", TokenType::FALSE},
-            {"if", TokenType::IF},
-            {"else", TokenType::ELSE},
-            {"while", TokenType::WHILE},
-            {"return", TokenType::RETURN}};
+            {"fn", TokenType::TOKEN_FUNCTION},
+            {"let", TokenType::TOKEN_LET},
+            {"true", TokenType::TOKEN_TRUE},
+            {"false", TokenType::TOKEN_FALSE},
+            {"if", TokenType::TOKEN_IF},
+            {"else", TokenType::TOKEN_ELSE},
+            {"while", TokenType::TOKEN_WHILE},
+            {"return", TokenType::TOKEN_RETURN}};
 
     /*
         A token consists of a token type (TokenType) and a token literal (std::string) that expresses both the value and the type of the token.
