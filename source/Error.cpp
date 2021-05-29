@@ -31,13 +31,13 @@ namespace noscript
         if (m_TokenExpected.m_TokenType != TokenType::TOKEN_NOTSET && m_TokenFound.m_TokenType != TokenType::TOKEN_NOTSET)
             return "- " + m_ErrorHeader + ": " +
                    m_ErrorMessage +
-                   ".\n\tExpected: " + EnumAsString(m_TokenExpected.m_TokenType) +
-                   ", \tFound: " + EnumAsString(m_TokenFound.m_TokenType) + ".\n";
+                   "\n\tExpected: " + EnumAsString(m_TokenExpected.m_TokenType) +
+                   ", \tFound: " + EnumAsString(m_TokenFound.m_TokenType) + "\n";
 
         if (m_ErrorHeader.empty())
-            return "- Error: " + m_ErrorMessage + ".\n";
+            return "- Error: " + m_ErrorMessage + "\n";
 
         return "- " + m_ErrorHeader + ": " +
-               m_ErrorMessage + ".\n";
+               m_ErrorMessage + "\n";
     }
 }
