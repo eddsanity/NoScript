@@ -1,6 +1,13 @@
 # NoScript
 The one and only NoScript programming language repository. Of course.
 
+## Status
+Lexer is fully complete. 
+
+Parser is pretty much complete. Bulk of the work, expressions, is done. A few things remain: Grouped Expressions, While statements and If statements.
+
+No REPL yet, since I don't evaluate the AST yet.
+
 ## Generate project using CMake
 
 ```bash
