@@ -69,6 +69,8 @@ namespace noscript
         this->ConsumeToken();
 
         stmt_value = this->ParseExpression(LOWEST);
+        if (stmt_value == nullptr)
+            return nullptr;
 
         // Move past the rhs-expression token
         // this->ConsumeToken();
@@ -90,7 +92,9 @@ namespace noscript
         // Move past the TOKEN_RETURN token
         this->ConsumeToken();
 
-        stmt_value = nullptr;
+        stmt_value = this->ParseExpression(LOWEST);
+        if (stmt_value == nullptr)
+            return nullptr;
 
         // Move past the return expression token
         // this->ConsumeToken();
@@ -134,7 +138,8 @@ namespace noscript
             If there is a parse function associated with the token type, get that function and execute it
             and return whatever it returns
         */
-        auto left_expression = m_PrefixParseFunctions.at(m_ParserCurrToken.m_TokenType)(*this);
+        auto prefix_fn_ptr = m_PrefixParseFunctions.at(m_ParserCurrToken.m_TokenType);
+        auto left_expression = prefix_fn_ptr(*this);
         return left_expression;
     }
 }

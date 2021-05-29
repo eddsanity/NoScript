@@ -17,7 +17,7 @@ namespace noscript
 
         try
         {
-            int64_value = std::stoi(int64_literal->TokenLiteral());
+            int64_value = std::stoi(int64_literal->TokenLiteral(), 0, 10);
         }
         catch (std::invalid_argument)
         {

@@ -39,15 +39,23 @@ auto main() -> int
     // noscript::Lexer lexer{lexer_input};
     // noscript::Parser parser(&lexer);
 
-    std::string input = "let x = 5;";
+    // std::string input = "let x = 5;";
+    // noscript::Lexer lexer(input);
+    // noscript::Parser parser(&lexer);
+
+    // noscript::LetStatement* stmt = dynamic_cast<noscript::LetStatement*>(parser.ParseLetStatement());
+    // // auto let_stmt = dynamic_cast<noscript::LetStatement*>(parser.ParseLetStatement());
+    // std::cout << stmt->TokenBody() << "\n";
+    // std::cout << stmt->m_IdentifierName->TokenBody() << "\n";
+    // std::cout << stmt->m_IdentifierValue->TokenBody() << "\n";
+
+        std::string input = "return 5;";
     noscript::Lexer lexer(input);
     noscript::Parser parser(&lexer);
 
-    noscript::LetStatement* stmt = dynamic_cast<noscript::LetStatement*>(parser.ParseLetStatement());
-    // auto let_stmt = dynamic_cast<noscript::LetStatement*>(parser.ParseLetStatement());
-    std::cout << stmt->TokenBody() << "\n";
-    std::cout << stmt->m_IdentifierName->TokenBody() << "\n";
-    std::cout << stmt->m_IdentifierValue->TokenBody() << "\n";
+    noscript::RetStatement* ret_stmt = dynamic_cast<noscript::RetStatement*>(parser.ParseRetStatement());
+    std::cout << ret_stmt->TokenBody();
+
     // auto program = parser.ParseProgram();
 
     // std::cout << "Aloooooooooo00oooooo\n";
