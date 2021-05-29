@@ -21,7 +21,7 @@ namespace noscript
         }
         catch (std::invalid_argument)
         {
-            p_parser.m_ErrorLogger.errlog("Couldn't parse integer");
+            p_parser.m_ErrorLogger.errlog("Invalid Integer literal: " + p_parser.m_ParserCurrToken.m_TokenLiteral);
             return nullptr;
         }
 
@@ -37,6 +37,12 @@ namespace noscript
         p_parser.ConsumeToken();
 
         prefix_expr->m_RhsExpression = p_parser.ParseExpression(PREFIX);
+
+        if (prefix_expr->m_RhsExpression == nullptr)
+        {
+            p_parser.m_ErrorLogger.errlog("Invalid operand for prefix operator: " + p_parser.m_ParserCurrToken.m_TokenLiteral);
+            return nullptr;
+        }
 
         return prefix_expr;
     }
