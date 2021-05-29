@@ -33,11 +33,17 @@ auto main() -> int
     //                           "return my_var;" \
     //                           "return 5050;" \
     //                           "return (e^x);";
-    // std::string lexer_input = "foobar;" \
-    //                           "x;" \
-    //                           "5 + 6;";
-    // noscript::Lexer lexer{lexer_input};
-    // noscript::Parser parser(&lexer);
+    std::string lexer_input = "let = 5;" \
+                              "let x 5;" \
+                              "return ;" \
+                              "-5 + let;" \
+                              "- + 5;";
+    noscript::Lexer lexer{lexer_input};
+    noscript::Parser parser(&lexer);
+    
+    auto program = parser.ParseProgram();
+
+    parser.m_ErrorLogger.PrintErrLogs(std::cout);
 
     // std::string input = "let x = 5;";
     // noscript::Lexer lexer(input);
@@ -49,12 +55,29 @@ auto main() -> int
     // std::cout << stmt->m_IdentifierName->TokenBody() << "\n";
     // std::cout << stmt->m_IdentifierValue->TokenBody() << "\n";
 
-        std::string input = "return 5;";
-    noscript::Lexer lexer(input);
-    noscript::Parser parser(&lexer);
+    // std::string input = "return 5;";
+    // noscript::Lexer lexer(input);
+    // noscript::Parser parser(&lexer);
 
-    noscript::RetStatement* ret_stmt = dynamic_cast<noscript::RetStatement*>(parser.ParseRetStatement());
-    std::cout << ret_stmt->TokenBody();
+    // noscript::RetStatement *ret_stmt = dynamic_cast<noscript::RetStatement *>(parser.ParseRetStatement());
+    // std::cout << ret_stmt->TokenBody();
+
+    // std::string input = "-5;";
+    // noscript::Lexer lexer(input);
+    // noscript::Parser parser(&lexer);
+
+    // noscript::PrefixExpression *prefix_expr = dynamic_cast<noscript::PrefixExpression *>(parser.ParseExpression(noscript::PREFIX));
+
+    // std::cout << prefix_expr->TokenBody() << std::endl;
+
+    // std::string input = "-5 * 6;";
+    // noscript::Lexer lexer(input);
+    // noscript::Parser parser(&lexer);
+
+    // noscript::InfixExpression *infix_expr = dynamic_cast<noscript::InfixExpression *>(parser.ParseExpression(noscript::LOWEST));
+
+    // std::cout << infix_expr->TokenBody() << std::endl;
+
 
     // auto program = parser.ParseProgram();
 
