@@ -77,7 +77,7 @@ namespace noscript
     auto
     PrefixExpression::TokenBody() noexcept -> string
     {
-        return "{" + noscript::EnumAsString(m_Token.m_TokenType) + ", " + m_RhsExpression->TokenBody() + "}";
+        return "{" + noscript::EnumAsString(m_Token.m_TokenType) + ",\n\t" + m_RhsExpression->TokenBody() + "}";
     }
 
     auto
@@ -92,6 +92,31 @@ namespace noscript
         string output{""};
 
         output += "(";
+        output += m_Operator;
+        output += m_RhsExpression->ToString();
+        output += ")";
+        return output;
+    }
+
+    auto
+    InfixExpression::TokenBody() noexcept -> string
+    {
+        return "{" + noscript::EnumAsString(m_Token.m_TokenType) + ",\n\t" + m_LhsExpression->TokenBody() + "\n" + m_Token.m_TokenLiteral + "\n\t" + m_RhsExpression->TokenBody() + "}";
+    }
+
+    auto
+    InfixExpression::TokenLiteral() noexcept -> string
+    {
+        return m_Token.m_TokenLiteral;
+    }
+
+    auto
+    InfixExpression::ToString() noexcept -> string
+    {
+        string output{""};
+
+        output += "(";
+        output += m_LhsExpression->ToString();
         output += m_Operator;
         output += m_RhsExpression->ToString();
         output += ")";

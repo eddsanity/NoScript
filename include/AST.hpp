@@ -82,6 +82,20 @@ namespace noscript
         Expression *m_RhsExpression;
     };
 
+    class InfixExpression : public Expression
+    {
+    public:
+        InfixExpression(Token p_Token, const string &p_Operator, Expression *p_LhsExpression) noexcept : m_Token(p_Token), m_Operator(p_Operator), m_LhsExpression(p_LhsExpression) {}
+        auto TokenBody() noexcept -> string;
+        auto TokenLiteral() noexcept -> string;
+        auto ToString() noexcept -> string;
+
+        Token m_Token;
+        string m_Operator;
+        Expression *m_LhsExpression;
+        Expression *m_RhsExpression;
+    };
+
     /*
         LetStatement Node
         A let statement strictly takes the format of `let <Identifier> = <Expression>`
