@@ -17,7 +17,7 @@ namespace noscript
         InfixParse takes an Expression because an infix operator has to care about the
         left-side expression.
     */
-    using func_InfixParse = std::function<Expression*(Expression*)>;
+    using func_InfixParse = std::function<Expression*(Parser&, Expression*)>;
 }
 
 #endif
