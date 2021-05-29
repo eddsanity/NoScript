@@ -3,6 +3,7 @@
 #include <utility.hpp>
 #include <Token.hpp>
 #include <Lexer.hpp>
+#include <AST.hpp>
 #include <Parser.hpp>
 
 auto main() -> int
@@ -33,14 +34,16 @@ auto main() -> int
     //                           "return 5050;" \
     //                           "return (e^x);";
     std::string lexer_input = "foobar;" \
-                              "x;";
+                              "x;" \
+                              "5 + 6;";
     noscript::Lexer lexer{lexer_input};
     noscript::Parser parser(&lexer);
 
     auto program = parser.ParseProgram();
     
+    std::cout << "Alooooooooooooooo\n";
     for(auto& stmt : program->m_Statements)
-        std::cout << stmt->TokenLiteral() << std::endl;
+        std::cout << stmt->TokenBody() << "\n";
     // std::cout << "IDENTIFIERS: \n";
     // for(auto& stmt : program->m_Statements)
     //     std::cout << stmt->TokenLiteral() << std::endl;

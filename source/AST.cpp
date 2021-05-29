@@ -1,4 +1,5 @@
 #include <AST.hpp>
+#include <utility.hpp>
 
 namespace noscript
 {
@@ -9,7 +10,16 @@ namespace noscript
     }
 
     auto
-    Program::TokenLiteral() -> string
+    Program::TokenBody() noexcept -> string
+    {
+        if (m_Statements.size() > 0)
+            return m_Statements[0]->TokenBody();
+        else
+            return "";
+    }
+
+    auto
+    Program::TokenLiteral() noexcept -> string
     {
         if (m_Statements.size() > 0)
             return m_Statements[0]->TokenLiteral();
@@ -18,7 +28,7 @@ namespace noscript
     }
 
     auto
-    Program::ToString() -> string
+    Program::ToString() noexcept -> string
     {
         string output_string = "";
         for (auto &stmt : m_Statements)
@@ -27,13 +37,19 @@ namespace noscript
     }
 
     auto
-    ExpressionStatement::TokenLiteral() -> string
+    ExpressionStatement::TokenBody() noexcept -> string
+    {
+        return "{" + noscript::EnumAsString(m_Token.m_TokenType) + ", " + m_Token.m_TokenLiteral + "}";
+    }
+
+    auto
+    ExpressionStatement::TokenLiteral() noexcept -> string
     {
         return m_Token.m_TokenLiteral;
     }
 
     auto
-    ExpressionStatement::ToString() -> string
+    ExpressionStatement::ToString() noexcept -> string
     {
         if (m_Expression != nullptr)
             return m_Expression->ToString();
@@ -41,28 +57,40 @@ namespace noscript
     }
 
     auto
-    IntegerLiteral::TokenLiteral() -> string
+    IntegerLiteral::TokenBody() noexcept -> string
+    {
+        return "{" + noscript::EnumAsString(m_Token.m_TokenType) + ", " + std::to_string(m_Int64Value) + "}";
+    }
+
+    auto
+    IntegerLiteral::TokenLiteral() noexcept -> string
     {
         return m_Token.m_TokenLiteral;
     }
 
     auto
-    IntegerLiteral::ToString() -> string
+    IntegerLiteral::ToString() noexcept -> string
     {
         return m_Token.m_TokenLiteral;
     }
 
     auto
-    LetStatement::TokenLiteral() -> string
+    LetStatement::TokenBody() noexcept -> string
+    {
+        return "{" + noscript::EnumAsString(m_Token.m_TokenType) + ", " + m_Token.m_TokenLiteral + "}";
+    }
+
+    auto
+    LetStatement::TokenLiteral() noexcept -> string
     {
         return m_Token.m_TokenLiteral;
     }
 
     auto
-    LetStatement::ToString() -> string
+    LetStatement::ToString() noexcept -> string
     {
         string output_string("");
-        output_string += this->TokenLiteral() + " ";
+        output_string += this->TokenBody() + " ";
         output_string += m_IdentifierName->ToString();
         output_string += " = ";
 
@@ -74,16 +102,22 @@ namespace noscript
     }
 
     auto
-    RetStatement::TokenLiteral() -> string
+    RetStatement::TokenBody() noexcept -> string
+    {
+        return "{" + noscript::EnumAsString(m_Token.m_TokenType) + ", " + m_Token.m_TokenLiteral + "}";
+    }
+
+    auto
+    RetStatement::TokenLiteral() noexcept -> string
     {
         return m_Token.m_TokenLiteral;
     }
 
     auto
-    RetStatement::ToString() -> string
+    RetStatement::ToString() noexcept -> string
     {
         string output_string("");
-        output_string += this->TokenLiteral() + " ";
+        output_string += this->TokenBody() + " ";
 
         if (m_ReturnValue != nullptr)
             output_string += m_ReturnValue->ToString();

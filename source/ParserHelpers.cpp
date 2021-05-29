@@ -15,6 +15,7 @@ namespace noscript
         this->ConsumeToken();
 
         this->PutPrefix(TokenType::IDENT, ParseIdentifier);
+        this->PutPrefix(TokenType::INT, ParseInteger);
     }
 
     auto
