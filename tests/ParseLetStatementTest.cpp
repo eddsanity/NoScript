@@ -1,7 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #define DOCTEST_CONFIG_USE_STD_HEADERS
 
-#include "doctest.h"
+#include "doctest/doctest/doctest.h"
 #include <Node.hpp>
 #include <Token.hpp>
 #include <Identifier.hpp>
