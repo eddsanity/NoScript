@@ -28,4 +28,16 @@ namespace noscript
         int64_literal->m_Int64Value = int64_value;
         return int64_literal;
     }
+
+    auto
+    ParsePrefixExpression(Parser &p_parser) noexcept -> Expression *
+    {
+        PrefixExpression *prefix_expr = new PrefixExpression(p_parser.m_ParserCurrToken, p_parser.m_ParserCurrToken.m_TokenLiteral);
+
+        p_parser.ConsumeToken();
+
+        prefix_expr->m_RhsExpression = p_parser.ParseExpression(PREFIX);
+
+        return prefix_expr;
+    }
 }

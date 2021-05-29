@@ -132,7 +132,10 @@ namespace noscript
             If there are no parse functions associated with the token type, return null
         */
         if (m_PrefixParseFunctions.find(m_ParserCurrToken.m_TokenType) == m_PrefixParseFunctions.end())
+        {
+            m_ErrorLogger.errlog("no prefix parse function for " + noscript::EnumAsString(m_ParserCurrToken.m_TokenType) + " found.");
             return nullptr;
+        }
 
         /*
             If there is a parse function associated with the token type, get that function and execute it

@@ -12,6 +12,9 @@ namespace noscript
 
     auto
     ParseInteger(Parser &p_parser) noexcept -> Expression *;
+
+    auto
+    ParsePrefixExpression(Parser &p_parser) noexcept -> Expression *;
 }
 
 #endif

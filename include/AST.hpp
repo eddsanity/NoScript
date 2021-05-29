@@ -37,6 +37,11 @@ namespace noscript
         ~Program() noexcept;
     };
 
+    /*
+        ExpressionStatement Node
+        An Expression Statement is an expression, used as a program statement.
+        example: "5 + 5;". This, in the REPL, would output 10.
+    */
     class ExpressionStatement : public Statement
     {
     public:
@@ -48,16 +53,33 @@ namespace noscript
         Expression *m_Expression;
     };
 
+    /*
+        IntegerLiteral Node
+        An Integer Literal is an expression, containing a 64-bit integer value
+    */
     class IntegerLiteral : public Expression
     {
     public:
-        IntegerLiteral(Token p_Token) noexcept : m_Token(p_Token) { }
+        IntegerLiteral(Token p_Token) noexcept : m_Token(p_Token) {}
         auto TokenBody() noexcept -> string;
         auto TokenLiteral() noexcept -> string;
         auto ToString() noexcept -> string;
 
         Token m_Token;
         int64_t m_Int64Value;
+    };
+
+    class PrefixExpression : public Expression
+    {
+    public:
+        PrefixExpression(Token p_Token, const string &p_Operator) noexcept : m_Token(p_Token), m_Operator(p_Operator) {}
+        auto TokenBody() noexcept -> string;
+        auto TokenLiteral() noexcept -> string;
+        auto ToString() noexcept -> string;
+
+        Token m_Token; /* Prefix Operator Token */
+        string m_Operator;
+        Expression *m_RhsExpression;
     };
 
     /*
