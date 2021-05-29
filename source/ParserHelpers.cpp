@@ -4,6 +4,7 @@
 #include <Parser.hpp>
 #include <ParserTypes.hpp>
 #include <PrefixParseFunctions.hpp>
+#include <InfixParseFunctions.hpp>
 
 namespace noscript
 {
@@ -18,6 +19,17 @@ namespace noscript
         this->PutPrefix(TokenType::TOKEN_INT, ParseInteger);
         this->PutPrefix(TokenType::TOKEN_NOT, ParsePrefixExpression);
         this->PutPrefix(TokenType::TOKEN_MINUS, ParsePrefixExpression);
+
+        this->PutInfix(TokenType::TOKEN_PLUS, parseInfixExpression);
+        this->PutInfix(TokenType::TOKEN_MINUS, parseInfixExpression);
+        this->PutInfix(TokenType::TOKEN_SLASH, parseInfixExpression);
+        this->PutInfix(TokenType::TOKEN_ASTERISK, parseInfixExpression);
+        this->PutInfix(TokenType::TOKEN_EQ, parseInfixExpression);
+        this->PutInfix(TokenType::TOKEN_NEQ, parseInfixExpression);
+        this->PutInfix(TokenType::TOKEN_LT, parseInfixExpression);
+        this->PutInfix(TokenType::TOKEN_LTE, parseInfixExpression);
+        this->PutInfix(TokenType::TOKEN_GT, parseInfixExpression);
+        this->PutInfix(TokenType::TOKEN_GTE, parseInfixExpression);
     }
 
     auto
