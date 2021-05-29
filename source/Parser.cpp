@@ -48,7 +48,7 @@ namespace noscript
         // If the token immediately after the TOKEN_LET isn't an identifier, catch the error.
         if (m_ParserCurrToken.m_TokenType != TokenType::TOKEN_IDENT)
         {
-            m_ErrorLogger.errlog("Syntax Error", "Expected an identifier in TOKEN_LET statement");
+            m_ErrorLogger.errlog("Expecting an IDENTIFIER, found: " + m_ParserCurrToken.m_TokenLiteral);
             return nullptr;
         }
 
@@ -61,7 +61,7 @@ namespace noscript
         // If the token immediately after the identifier isn't an assignment operator, catch the error.
         if (m_ParserCurrToken.m_TokenType != TokenType::TOKEN_ASSIGN)
         {
-            m_ErrorLogger.errlog("Syntax Error", "Expected an assignment operator in TOKEN_LET statement");
+            m_ErrorLogger.errlog("Expecting an ASSIGNMENT (=) operator, found: " + m_ParserCurrToken.m_TokenLiteral);
             return nullptr;
         }
 
@@ -103,7 +103,7 @@ namespace noscript
 
         if (m_ParserCurrToken.m_TokenType != TokenType::TOKEN_SEMICOLON)
         {
-            m_ErrorLogger.errlog("Missing semicolon", "Expecting a semicolo");
+            m_ErrorLogger.errlog("Missing semicolon");
             return nullptr;
         }
 
@@ -133,7 +133,7 @@ namespace noscript
         */
         if (m_PrefixParseFunctions.find(m_ParserCurrToken.m_TokenType) == m_PrefixParseFunctions.end())
         {
-            m_ErrorLogger.errlog("no prefix parse function for " + noscript::EnumAsString(m_ParserCurrToken.m_TokenType) + " found.");
+            m_ErrorLogger.errlog("Invalid operator: " + m_ParserCurrToken.m_TokenLiteral);
             return nullptr;
         }
 
@@ -143,6 +143,35 @@ namespace noscript
         */
         auto prefix_fn_ptr = m_PrefixParseFunctions.at(m_ParserCurrToken.m_TokenType);
         auto left_expression = prefix_fn_ptr(*this);
+
+        /*
+            If the left expression is null, then the prefix_fn_ptr failed
+            log the error and return null
+        */
+        if (left_expression == nullptr)
+            return nullptr;
+
+        while (m_ParserPeekToken.m_TokenType != TokenType::TOKEN_SEMICOLON &&
+               p_precedence < LookupPrecedence(m_ParserPeekToken.m_TokenType))
+        {
+            auto infix_fn_ptr = m_InfixParseFunctions.at(m_ParserPeekToken.m_TokenType);
+
+            /* If no infix function exists for the parsed token, return whatever's LHS is */
+            if (infix_fn_ptr == nullptr)
+                return left_expression;
+
+            this->ConsumeToken();
+
+            left_expression = infix_fn_ptr(*this, left_expression);
+
+            /*
+                Similar to left_expression in the prefix situation, if left_expression is null
+                then infix_fn_ptr has failed, log the error and return null
+            */
+            if (left_expression == nullptr)
+                return nullptr;
+        }
+
         return left_expression;
     }
 }
