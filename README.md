@@ -5,6 +5,7 @@ The one and only NoScript programming language repository. Of course.
 
 ```bash
   git clone git@github.com:eddsanity/NoScript.git
+  cd NoScript
   mkdir build
   cd build
   cmake ..
