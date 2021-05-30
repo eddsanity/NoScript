@@ -78,7 +78,7 @@ namespace noscript
     auto
     LookupIdentifier(const std::string &lexeme) -> TokenType;
 
-    const std::map<std::string, TokenType> keywords =
+    inline const std::map<std::string, TokenType> keywords =
         {
             {"fn", TokenType::TOKEN_FUNCTION},
             {"let", TokenType::TOKEN_LET},
@@ -102,5 +102,6 @@ namespace noscript
         std::string m_TokenLiteral;
     };
 }
+
 
 #endif
